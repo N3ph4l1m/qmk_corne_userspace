@@ -1,6 +1,7 @@
 {
   "userspace_version": "1.1",
   "build_targets": [
-    ["crkbd", "rwillox"]
+    ["crkbd", "rwillox"],
+    ["splitkb/aurora/corne", "rwillox"]
   ]
 }
