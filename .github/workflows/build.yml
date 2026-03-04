@@ -23,7 +23,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           pip install qmk
-          qmk setup -y -H . --no-git
+          qmk setup -y -H .
 
       - name: Build firmware
         run: |
