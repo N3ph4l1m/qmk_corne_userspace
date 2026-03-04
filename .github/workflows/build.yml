@@ -1,0 +1,46 @@
+name: QMK Build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "keyboards/**"
+      - "qmk.json"
+      - ".github/workflows/build.yml"
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Set up QMK
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install qmk
+          qmk setup -y -H . --no-git
+
+      - name: Build firmware
+        run: |
+          # Build crkbd (hex output)
+          echo "Building crkbd:rwillox"
+          qmk compile -kb crkbd -km rwillox
+
+          # Build splitkb/aurora/corne (UF2 output)
+          echo "Building splitkb/aurora/corne:rwillox"
+          qmk compile -kb splitkb/aurora/corne -km rwillox
+
+      - name: Upload artifacts
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: firmware
+          path: |
+            .build/*crkbd*.hex
+            .build/*splitkb_aurora_corne*.uf2
+          retention-days: 30

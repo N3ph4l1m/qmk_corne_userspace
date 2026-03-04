@@ -1,0 +1,24 @@
+# QMK Firmware Binaries
+*.hex
+*.bin
+*.uf2
+*.map
+*.elf
+
+# Build Directories & Artifacts
+.build/
+obj_*/
+*.o
+*.a
+*.d
+
+# Environment & Tooling
+.venv/
+node_modules/
+compile_commands.json
+.vscode/
+.idea/
+
+# OS Specific
+.DS_Store
+Thumbs.db

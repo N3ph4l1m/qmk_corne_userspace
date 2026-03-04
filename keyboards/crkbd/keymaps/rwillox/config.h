@@ -20,5 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
 
 #define TAPPING_TOGGLE 1
-#define TAPPING_TERM 280
+#define TAPPING_TERM 175
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
 #define UNICODE_SELECTED_MODES UNICODE_MODE_WINCOMPOSE, UNICODE_MODE_MACOS, UNICODE_MODE_LINUX
