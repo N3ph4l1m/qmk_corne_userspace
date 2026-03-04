@@ -11,35 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Set up QMK
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install qmk
-          qmk setup -y -H ~/qmk_firmware
-
-      - name: Link userspace
-        run: qmk config user.overlay_dir="${{ github.workspace }}"
-
-      - name: Build firmware
-        run: |
-          echo "Building crkbd:rwillox"
-          qmk compile -H ~/qmk_firmware -kb crkbd -km rwillox
-
-          echo "Building splitkb/aurora/corne:rwillox"
-          qmk compile -H ~/qmk_firmware -kb splitkb/aurora/corne -km rwillox
-
-      - name: Upload artifacts
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: firmware
-          path: |
-            ~/qmk_firmware/.build/*crkbd*.hex
-            ~/qmk_firmware/.build/*splitkb_aurora_corne*.uf2
-          retention-days: 30
+    uses: qmk/.github/.github/workflows/qmk_userspace_build.yml@main
+    with:
+      qmk_repo: qmk/qmk_firmware
+      qmk_ref: master
